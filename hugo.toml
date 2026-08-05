@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 locale = 'en-us'
-title = 'Quin Rogers'
+title = 'Evan McCaig'
 theme = 'quint'
 
 [params]
