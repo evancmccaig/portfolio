@@ -1,0 +1,7 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Evan McCaig'
+theme = 'quint'
+
+[params]
+  numImages = 12
