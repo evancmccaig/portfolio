@@ -3,6 +3,7 @@ title = "Hand to Hand Wizardry"
 date = '2026-08-12T00:00:00-07:00'
 draft = false
 description = "Level Designer, Encounter Designer, UI Programmer, Gameplay Programmer"
+itchio = "https://vfs-gdpg.itch.io/hand-to-hand-wizardry"
 +++
 
 <div class="video-embed">

@@ -3,7 +3,14 @@
     <main class="page-content" aria-label="Content">
         <article>
             <header class="header">
-                <h1 class="header-title project-title center">{{ .Title }}</h1>
+                <h1 class="header-title project-title center">
+                    {{ .Title }}
+                    {{ with .Params.itchio }}
+                    <a href="{{ . }}" class="itch-link" target="_blank" rel="noopener noreferrer" aria-label="View {{ $.Title }} on itch.io">
+                        <img src="/images/icons/itchio.png" alt="itch.io" class="itch-icon">
+                    </a>
+                    {{ end }}
+                </h1>
             </header>
             <div class="page-content">
                 {{ .Content }}

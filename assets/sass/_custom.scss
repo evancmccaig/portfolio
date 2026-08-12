@@ -82,6 +82,22 @@
 // entirely), so the title alone carries the heading.
 .project-title {
     font-weight: 800;
+
+    // itch.io link icon, rendered next to the title by
+    // layouts/projects/single.html when a project's front matter sets
+    // `itchio = "https://..."`. Inline within the (centered) <h1>, so
+    // it naturally sits to the right of the title text.
+    .itch-link {
+        display: inline-flex;
+        vertical-align: middle;
+        margin-left: 0.5rem;
+    }
+
+    .itch-icon {
+        width: 28px;
+        height: 28px;
+        vertical-align: middle;
+    }
 }
 
 // Reusable "same style as the project title" heading, for breaking a

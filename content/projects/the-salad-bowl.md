@@ -3,6 +3,7 @@ title = "The Salad Bowl"
 date = '2026-08-12T00:00:00-07:00'
 draft = false
 description = "UI Programmer, Systems Programmer, FMOD SFX Implementor"
+itchio = "https://squidypal.itch.io/the-salad-bowl"
 +++
 
 <img class="section-image" src="/images/projects/the-salad-bowl.jpg" alt="The Salad Bowl">

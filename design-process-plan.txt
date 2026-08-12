@@ -481,6 +481,30 @@ Wizardry and The Salad Bowl
     exactly Home/Projects/About. Visual check via screenshot.
 
 
+2026-08-12 — itch.io icon link next to project titles
+    Added a small itch.io icon next to each project's title, linking
+    out to that game's itch.io page (Hand-to-Hand Wizardry ->
+    vfs-gdpg.itch.io, The Salad Bowl -> squidypal.itch.io).
+    Fetched itch.io's own favicon directly (curl https://itch.io/
+    favicon.ico, 200 OK) rather than hand-drawing/guessing at their
+    logo mark, converted to PNG (static/images/icons/itchio.png,
+    32x32) - RGBA with transparency, colored (not a black/white mark),
+    so it's visible against both light and dark backgrounds with no
+    separate dark-mode variant needed.
+    Added a new front matter field, itchio = "https://...", read by
+    layouts/projects/single.html - the icon+link only renders when
+    that field is present, so it's per-project opt-in rather than
+    template-hardcoded. Icon sits inline inside the (centered) <h1>,
+    right after the title text, so it naturally lands to the right of
+    the title while the whole title+icon group stays centered as a
+    unit.
+    Verified: clean build, grep-confirmed both itch.io URLs and the
+    icon file present in each page's output. Visual check via
+    screenshot - icon correctly positioned right of both titles;
+    noted the small arrow next to it is the theme's own existing
+    a[target="_blank"]::after convention, not a bug.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
