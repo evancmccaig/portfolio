@@ -224,6 +224,33 @@ BATCH LOG
     the clear bold primary element on both, no date, video/bio intact.
 
 
+2026-08-12 — Avatar photo + homepage nav cards (replace "Recent Posts")
+    Avatar: assets/avatar.jpg appeared in the working tree as a 17MB,
+    6240x4160 camera original (Canon EOS 6D Mark II). Flagged the size
+    before committing; downscaled to 800px longest edge + stripped
+    EXIF via Pillow (17MB -> 41KB) before committing, since the theme
+    only ever displays it downscaled to ~210px. hugo.toml already
+    pointed params.author.avatar at "avatar.jpg" from the original
+    theme setup, so no config change was needed once the file existed.
+    Homepage nav: replaced the theme's "Recent Posts" feed (empty
+    anyway - no blog posts exist) with two link cards to Projects and
+    About. New layouts/home.html (project-root override of the
+    theme's home.html) + .home-links/.home-link* in
+    assets/sass/_custom.scss. While adding dark-mode colors for the
+    new cards, found and fixed a pre-existing gap: .project-item-title
+    link color and .project-item-description from the previous batch
+    were also missing dark-mode overrides (the theme's own dark-mode
+    mixin only knows about theme-native classes, not project-root
+    ones) - both fixed together via one @mixin custom-dark-mode,
+    triggered the same way the theme triggers its own (prefers-color-
+    scheme media query guarded by html:not(.light), plus html.dark).
+    Verified: clean build, grep-confirmed Recent Posts absent and both
+    link cards present. Visual check in BOTH light and dark
+    (prefers-color-scheme) via Playwright, colorScheme: 'dark' context
+    option - avatar renders cropped correctly, cards legible and
+    correctly colored in both modes.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

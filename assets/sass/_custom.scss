@@ -70,3 +70,80 @@
         color: $gray;
     }
 }
+
+// Homepage nav cards (layouts/home.html), replacing the theme's
+// "Recent Posts" feed with direct links to Projects and About.
+.home-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.home-link {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid $light;
+    border-radius: 6px;
+    color: $text-base-color;
+    transition: all 150ms ease-in 0s;
+
+    &:hover {
+        border-color: $text-link-blue;
+    }
+
+    .home-link-title {
+        font-size: 1.25em;
+        font-weight: 800;
+    }
+
+    .home-link-desc {
+        color: $gray;
+    }
+}
+
+// Dark-mode colors for the custom elements above. The theme's own
+// dark-mode mixin (themes/hugo-blog-awesome/assets/sass/_dark.scss)
+// doesn't know about these project-root classes, so they need their
+// own dark overrides here, following the same trigger the theme uses:
+// prefers-color-scheme when defaultColor is "auto", or html.dark when
+// it's forced.
+@mixin custom-dark-mode {
+    .project-item-title a {
+        color: $dark-white;
+
+        &:hover {
+            color: $dark-text-link-blue;
+        }
+    }
+
+    .project-item-description {
+        color: $dark-gray;
+    }
+
+    .home-link {
+        border-color: $dark-light;
+        color: $dark-white;
+
+        &:hover {
+            border-color: $dark-text-link-blue;
+        }
+
+        .home-link-desc {
+            color: $dark-gray;
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light) {
+        @include custom-dark-mode;
+    }
+}
+
+html.dark {
+    @include custom-dark-mode;
+}

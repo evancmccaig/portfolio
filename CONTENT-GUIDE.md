@@ -21,7 +21,8 @@ verification steps that get run before anything ships.
 | Homepage name (shown under the avatar) | `hugo.toml` | `params.author.intro` |
 | Homepage bio / tagline (shown under the name) | `hugo.toml` | `params.author.description` |
 | Author name (schema.org / meta author tags, post bylines) | `hugo.toml` | `params.author.name` |
-| Avatar photo | `assets/avatar.jpg` | Add/replace the file (square image; not rendered if missing — no error) |
+| Avatar photo | `assets/avatar.jpg` | Add/replace the file (not rendered if missing — no error). Keep it web-sized before committing — Hugo only ever displays it downscaled to ~210px, so there's no reason to commit a full multi-megabyte camera original into git history. |
+| Homepage content below the bio (currently two link cards: Projects, About) | `layouts/home.html` | Project-root override of the theme's home template — replaces the theme's default "Recent Posts" feed. Card text/links are in this file; card styling is `.home-links`/`.home-link*` in `assets/sass/_custom.scss`. |
 | Site-wide fallback meta description | `hugo.toml` | `params.description` |
 | Default color mode (light/dark/auto) | `hugo.toml` | `params.defaultColor` |
 | Nav menu items, order, links | `hugo.toml` | `[[menu.main]]` blocks — `name`, `url`, `pageRef`, `weight` (lower weight = further left) |

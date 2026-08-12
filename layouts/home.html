@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{{- $defaultColor := .Site.Params.defaultColor | default "auto" -}}
+
+{{/* allow website developer to enforce default dark mode */}}
+{{- if eq $defaultColor "dark" -}}
+<html lang="{{ .Site.Language.Locale }}" class="dark">
+{{- else if eq $defaultColor "light" -}}
+<html lang="{{ .Site.Language.Locale }}" class="light">
+{{- else -}}
+<html lang="{{ .Site.Language.Locale }}">
+{{- end -}}
+
+{{- partial "head.html" . -}}
+
+<body data-theme="{{ $defaultColor }}" class="notransition">
+    {{- partial "scriptsBodyStart.html" . -}}
+    {{- partial "header.html" . -}}
+    <div class="wrapper">
+        {{ partial "bio" . }}
+        <main aria-label="Content">
+            <div class="home-links">
+                {{ with site.GetPage "projects" }}
+                <a class="home-link" href="{{ .Permalink }}">
+                    <span class="home-link-title">Projects</span>
+                    <span class="home-link-desc">See what I've built</span>
+                </a>
+                {{ end }}
+                {{ with site.GetPage "about" }}
+                <a class="home-link" href="{{ .Permalink }}">
+                    <span class="home-link-title">About</span>
+                    <span class="home-link-desc">Learn more about me</span>
+                </a>
+                {{ end }}
+            </div>
+        </main>
+    </div>
+    {{- partial "footer.html" . -}}
+    {{- partial "scriptsBodyEnd.html" . -}}
+</body>
+
+</html>
