@@ -380,6 +380,16 @@ template with a still image instead of a video
     correctly in their 16:9 boxes.
 
 
+2026-08-12 — Center-align project page titles
+    Reused the theme's own existing .header-title.center modifier
+    (already used on the Projects list heading) rather than writing
+    new CSS - added "center" to the h1 class list in
+    layouts/projects/single.html. Applies to all project pages via
+    the shared section template, not per-file. Verified: clean build,
+    grep-confirmed class on both Hand-to-Hand Wizardry and The Salad
+    Bowl; visual check via screenshot of both page tops.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
