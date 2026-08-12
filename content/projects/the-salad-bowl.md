@@ -11,10 +11,7 @@ description = "Placeholder — replace with a real description."
 
 _Placeholder — replace with a real bio for The Salad Bowl._
 
-## Level Design {.section-heading}
-
-_Placeholder — replace with a real Level Design write-up._
 
 ## Programming {.section-heading}
 
-_Placeholder demo text — replace with a real Programming write-up._
+_Placeholder_
