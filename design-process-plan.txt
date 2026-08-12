@@ -341,6 +341,28 @@ template with a still image instead of a video
     Playwright screenshot against the real image.
 
 
+2026-08-12 — Investigated "missing subheadings" report — false alarm
+    Report: both project titles look right, but the Level Design /
+    Programming subheadings and the Salad Bowl thumbnail were said to
+    be missing. Checked before changing anything, per WORKFLOW step 6:
+    - Source .md files for both projects already had both
+      {.section-heading} sections and correct content.
+    - Live site (curl'd directly, not just eyeballed) already
+      rendered both headings correctly on Hand-to-Hand Wizardry and
+      The Salad Bowl.
+    - Clean local rebuild + full-page Playwright screenshots of both
+      pages confirmed everything present and correctly styled.
+    Nothing was actually broken - this is the same class of issue as
+    the earlier "embed not visible" report: a stale cached view on the
+    user's end, not a deploy or code problem. No content or template
+    change was needed or made.
+    Found and removed one incidental thing: a duplicate copy of
+    TheSaladBowlThumbnail.jpg had been dropped in the repo root
+    (identical file, confirmed by hash, to the one already correctly
+    placed at static/images/projects/the-salad-bowl.jpg) - deleted it
+    since it was untracked and redundant; nothing referenced it.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
