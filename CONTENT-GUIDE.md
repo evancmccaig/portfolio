@@ -11,7 +11,7 @@ root *before* falling back to the theme's copies) is what makes that
 possible without forking the theme.
 
 For batching several of these into one request at once, see
-`design-process-plan.txt` — it defines a shorthand format and the
+`design-process-plan.md` — it defines a shorthand format and the
 verification steps that get run before anything ships.
 
 | Content Type | File | What You Edit |
