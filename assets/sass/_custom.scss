@@ -4,15 +4,20 @@
 // this file overrides it because Hugo's asset pipeline resolves
 // project-root assets/ ahead of the theme's.
 
-// Responsive 16:9 video embed wrapper. Keeps embedded videos (e.g.
-// project trailers) full-width up to their native resolution instead
-// of overflowing small screens.
-.video-embed {
+// Shared box for a project's lead media (video trailer or a still
+// image) — responsive 16:9, full-width up to a sensible cap so it
+// never upscales past a reasonable source resolution.
+@mixin media-embed-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
     aspect-ratio: 16 / 9;
     margin: 1.5rem 0;
+}
+
+// <div class="video-embed"><iframe ...></iframe></div>
+.video-embed {
+    @include media-embed-box;
 
     iframe {
         position: absolute;
@@ -21,6 +26,23 @@
         width: 100%;
         height: 100%;
         border: 0;
+    }
+}
+
+// <div class="image-embed"><img ...></div> — same box as video-embed,
+// for projects whose lead media is a still image instead of a video.
+// object-fit: cover fills the box even if the source image isn't
+// exactly 16:9, cropping rather than distorting or letterboxing.
+.image-embed {
+    @include media-embed-box;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 

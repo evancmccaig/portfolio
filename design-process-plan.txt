@@ -295,6 +295,33 @@ Wizardry; investigated "embed not working" report
     Playwright screenshot.
 
 
+2026-08-12 — Second project (The Salad Bowl), reusing the established
+template with a still image instead of a video
+    Mirrored Hand-to-Hand Wizardry's structure exactly: title, lead
+    media, bio paragraph, ## Level Design {.section-heading}, ##
+    Programming {.section-heading} - all placeholder text since no
+    real content was given for this project yet.
+    Lead media is a PNG, not a YouTube embed. Rather than duplicate
+    the 16:9 box CSS, factored the shared box properties out of
+    .video-embed into a @mixin media-embed-box, then added a sibling
+    .image-embed class (img + object-fit: cover, so a source image
+    that isn't exactly 16:9 crops instead of distorting or
+    letterboxing) - .video-embed itself is unchanged, so Hand-to-Hand
+    Wizardry's embed is unaffected.
+    Image file doesn't exist yet. Referenced it at
+    static/images/projects/the-salad-bowl.png (Hugo copies static/ to
+    the site root as-is - no page-bundle restructuring needed). Chose
+    static/ over assets/ (like avatar.jpg uses) because there's no
+    resizing/processing need here - the source is expected to already
+    be roughly 16:9, and object-fit: cover absorbs minor mismatches.
+    Verified: clean build, grep-confirmed image-embed class and img
+    src path in output. Visual check via Playwright screenshot -
+    confirmed the box holds its correct 16:9 shape via CSS
+    aspect-ratio even with the image file missing (broken-image icon
+    + alt text inside a correctly-sized box), proving the structure
+    works independently of whether the file exists yet.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

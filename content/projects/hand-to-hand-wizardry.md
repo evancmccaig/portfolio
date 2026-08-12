@@ -9,7 +9,8 @@ description = "A first-person, dark fantasy retro-shooter."
 <iframe src="https://www.youtube.com/embed/C3mWOifDKh4" title="Hand-to-Hand Wizardry" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-Hand-to-Hand Wizardry delivers a first-person, dark fantasy retro-shooter experience. Players inhabit the role of Zoltan, an arrogant mage who discards his own hands to infiltrate a subterranean lair where digits are worshipped. By grafting the remnants of fallen sorcerers onto his own wrists, Zoltan acquires arcane abilities used to shred through legions of monstrosities while unearthing a grim mystery buried deep within the earth.
+Hand to Hand Wizardry is a single-player Dark Fantasy Boomer Shooter where you play as a Wizard who willingly sacrifices both of his hands to gain access to a dungeon where hands are treated as religious symbols. You will graft dead wizards' hands onto your severed wrists to gain powerful spells that you use to traverse the dungeon, fight monstrous creatures, and discover the secrets that lie below the surface.
+
 
 ## Level Design {.section-heading}
 
@@ -18,7 +19,3 @@ _Placeholder — replace with a real Level Design write-up._
 ## Programming {.section-heading}
 
 _Placeholder demo text — replace with a real Programming write-up._
-
-## Level Design Assets
-
-_Coming soon._
