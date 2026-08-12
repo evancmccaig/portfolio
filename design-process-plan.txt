@@ -465,6 +465,22 @@ Wizardry and The Salad Bowl
     switches back.
 
 
+2026-08-12 — Remove Posts entirely (nav now Home / Projects / About only)
+    content/posts/ had already been deleted from a previous batch, but
+    the "Posts" nav item in hugo.toml still linked to it (a dead link,
+    not a 404 by design). Removed the [[menu.main]] block for Posts,
+    and also removed params.mainSections = ['posts'] - confirmed via
+    grep across the theme that it's ONLY read by the theme's own
+    home.html (the "Recent Posts" feed), which this project already
+    overrides with its own layouts/home.html that doesn't reference
+    mainSections at all - so it was dead config pointing at a section
+    that no longer exists. Updated CONTENT-GUIDE.md and this file to
+    drop stale Posts references accordingly.
+    Verified: clean build, confirmed zero output under public/posts/
+    (not just unlinked - genuinely absent), grep-confirmed nav renders
+    exactly Home/Projects/About. Visual check via screenshot.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

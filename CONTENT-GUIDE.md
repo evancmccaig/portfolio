@@ -30,8 +30,6 @@ verification steps that get run before anything ships.
 | Favicon / touch icons | `assets/icons/<same filename as theme's>` | Add a same-named file at the project root to override the theme's default (e.g. `assets/icons/favicon.ico`) |
 | Home page node (mostly vestigial — not visibly rendered) | `content/_index.md` | `title` in front matter |
 | About page | `content/pages/about.md` | `title`, `description` front matter + Markdown body |
-| Posts list page heading | `content/posts/_index.md` | `title` in front matter |
-| A blog post | `content/posts/<slug>.md` | `title`, `date`, `draft`, `description`, `isStarred` (adds a star icon on the card), `category` front matter + Markdown body |
 | Projects list page heading | `content/projects/_index.md` | `title` in front matter |
 | A project page | `content/projects/<slug>.md` | `title`, `date`, `draft`, `description` front matter + Markdown body. `date` is set but not displayed — the Projects section uses its own portfolio-style templates (`layouts/projects/single.html`, `layouts/projects/list.html`, `layouts/_partials/projectCard.html`) that drop the date and make the title the bold, primary element. Blog posts are unaffected — they still use the theme's generic date-showing templates. `description` doubles as the one-line teaser shown under the title on the Projects list page. |
 | Embedded video/media inside a page | Inside that page's `.md` body | Raw HTML (e.g. an `<iframe>`) — `markup.goldmark.renderer.unsafe = true` in `hugo.toml` allows this |
@@ -44,11 +42,11 @@ verification steps that get run before anything ships.
 | Date format shown on pages | `hugo.toml` | `params.dateFormat` |
 | RSS feed depth (summary vs full post) | `hugo.toml` | `params.rssFeedDescription` |
 | Google Analytics / Disqus comments | `hugo.toml` | `[services.googleAnalytics] id`, `[services.disqus] shortname` |
-| New page/post starting template | `themes/hugo-blog-awesome/archetypes/default.md` (read-only reference) | `hugo new posts/your-slug.md` or `hugo new projects/your-slug.md` scaffolds from it automatically — includes `description`, `isStarred`, `exclude_from_rss` fields |
+| New project page starting template | `themes/hugo-blog-awesome/archetypes/default.md` (read-only reference) | `hugo new projects/your-slug.md` scaffolds from it automatically — includes `description`, `isStarred`, `exclude_from_rss` fields |
 
 ## Notes
 - **`description` vs the body**: `description` in a page's front matter feeds meta tags, RSS, and search engine snippets — it is not shown on the page itself unless a template explicitly prints it (this theme's `single.html`/`list.html` don't). The visible page content is always the Markdown body.
-- **Starting a new post or project the safe way**: `hugo new posts/your-slug.md` or `hugo new projects/your-slug.md` — fills in front matter from the theme's own archetype. Remove `draft = true` to publish.
-- **`mainSections`** (`hugo.toml` → `params.mainSections`, currently `['posts']`) controls what shows in the homepage's "Recent Posts" feed. Projects are intentionally left out of that list — they're reached via the Projects nav item instead, so they don't get folded into a feed that's semantically about posts.
+- **Starting a new project the safe way**: `hugo new projects/your-slug.md` — fills in front matter from the theme's own archetype. Remove `draft = true` to publish.
+- **No blog/posts section**: the site only has Home, Projects, and About — the theme's blog-post scaffolding (`content/posts/`, `params.mainSections`, the "Recent Posts" homepage feed) has been removed entirely, not just unlinked from the nav.
 - **Multilingual config**: the theme's own example config (`themes/hugo-blog-awesome/exampleSite/hugo.toml`) is written for multiple languages via `[Languages.<code>]` blocks. This site intentionally uses the flat single-language form instead (`[params]` directly) — don't copy patterns from the exampleSite config wholesale, they won't apply as-is.
 - Anything under `themes/hugo-blog-awesome/` reflects the upstream theme. If you need to change something there permanently, copy the file to the matching path under the project root instead of editing it in place — that's what `assets/sass/_custom.scss` already does.

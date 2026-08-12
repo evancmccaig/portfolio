@@ -34,21 +34,15 @@ ignoreErrors = ["additional-script-loading-error"]
     url = '/projects/'
     weight = 20
   [[menu.main]]
-    pageRef = "posts"
-    name = 'Posts'
-    url = '/posts/'
-    weight = 30
-  [[menu.main]]
     pageRef = "about"
     name = 'About'
     url = '/about/'
-    weight = 40
+    weight = 30
 
 [params]
   sitename = "Evan McCaig"
   defaultColor = "auto"
   description = "Game Designer | C# | Unity"
-  mainSections = ['posts']
   toc = true
   tocOpen = false
   goToTop = true
