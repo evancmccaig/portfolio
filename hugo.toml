@@ -5,3 +5,4 @@ theme = 'quint'
 
 [params]
   numImages = 12
+  css = ["css/custom.css"]

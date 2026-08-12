@@ -3,7 +3,11 @@
     "allow": [
       "Bash(mkdir -p layouts)",
       "Bash(cp themes/quint/layouts/index.html layouts/index.html)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(sed -n '225,265p' themes/quint/static/css/*.css)",
+      "Bash(sed -n '565,580p' themes/quint/static/css/*.css)",
+      "Bash(curl -s http://localhost:1313/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:1313/css/custom.css)"
     ]
   }
 }
