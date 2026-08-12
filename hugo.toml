@@ -61,4 +61,8 @@ ignoreErrors = ["additional-script-loading-error"]
 
 [[params.socialIcons]]
   name = "linkedin"
-  url = "www.linkedin.com/in/evancmccaig"
+  url = "https://www.linkedin.com/in/evancmccaig"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:evancmccaig@gmail.com"

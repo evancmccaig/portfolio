@@ -573,6 +573,22 @@ compressed 2 oversized GIFs and 1 oversized JPEG before committing
     now-working image.
 
 
+2026-08-12 — Add email link to footer social icons, fix broken LinkedIn URL
+    Added a third [[params.socialIcons]] entry: name = "email", url =
+    "mailto:evancmccaig@gmail.com". Used the theme's existing "email"
+    icon (a generic envelope) rather than a Gmail-branded mark -
+    confirmed it exists in themes/hugo-blog-awesome/layouts/_partials/
+    svgs/svgs.html before using it; a provider-branded icon wouldn't
+    have been accurate for a plain mailto: link anyway.
+    While there, caught and fixed a real bug in the adjacent LinkedIn
+    entry: url = "www.linkedin.com/in/evancmccaig" was missing the
+    https:// scheme, which makes a browser treat it as a relative link
+    (broken) rather than external - added the scheme.
+    Verified: clean build, grep-confirmed both hrefs correct in output.
+    Visual check via full-page screenshot - all three icons (GitHub,
+    LinkedIn, email) render in the footer.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
