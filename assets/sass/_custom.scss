@@ -57,9 +57,8 @@
     width: 100%;
     max-width: 500px;
     height: auto;
-    margin: 1.5rem auto;
+    margin: 1.5rem 0;
     border-radius: 6px;
-    justify-content: left
 }
 
 // Two or more .section-image images side by side instead of stacked:
@@ -67,7 +66,7 @@
 .section-images {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin: 1.5rem 0;
 

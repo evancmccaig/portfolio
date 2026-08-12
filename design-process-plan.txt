@@ -446,6 +446,25 @@ Wizardry and The Salad Bowl
     screenshots of both pages.
 
 
+2026-08-12 — Left-align .section-image (was centered)
+    The actual centering mechanism was margin: 1.5rem auto on
+    .section-image - a stray justify-content: left that had been
+    added alongside it was a no-op (justify-content only affects flex/
+    grid containers; a block-display <img> isn't one), so just
+    removing/changing that alone wouldn't have fixed anything. Changed
+    margin to 1.5rem 0 for genuine left alignment, and switched
+    .section-images' justify-content from center to flex-start too,
+    for consistency between the single-image and side-by-side
+    patterns.
+    Verified: clean build, grep-confirmed the corrected margin in the
+    compiled CSS, visual check via screenshot.
+    Noted in passing (not changed): Hand-to-Hand Wizardry's four
+    subsection images are currently back on .image-embed rather than
+    .section-image (The Salad Bowl's are still on .section-image) -
+    this alignment fix won't be visible there unless/until that
+    switches back.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
