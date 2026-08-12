@@ -23,3 +23,50 @@
         border: 0;
     }
 }
+
+// Portfolio-style project title (single project page). No date sits
+// beneath it here (layouts/projects/single.html omits that block
+// entirely), so the title alone carries the heading.
+.project-title {
+    font-weight: 800;
+}
+
+// Portfolio-style project grid (layouts/projects/list.html +
+// layouts/_partials/projectCard.html). Deliberately not reusing the
+// theme's .post-item styling: that layout is a flex row built around
+// a date column, which doesn't apply here since projects have no
+// date. Cards stack as readable blocks instead, title-first and bold.
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-top: 1.5rem;
+}
+
+.project-item {
+    padding-bottom: 1.75rem;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $light;
+    }
+
+    .project-item-title {
+        margin: 0 0 0.35rem;
+        font-size: 1.5em;
+        font-weight: 800;
+
+        a {
+            color: $text-base-color;
+            transition: all 150ms ease-in 0s;
+
+            &:hover {
+                color: $text-link-blue;
+            }
+        }
+    }
+
+    .project-item-description {
+        margin: 0;
+        color: $gray;
+    }
+}

@@ -1,0 +1,8 @@
+<article class="project-item">
+    <h2 class="project-item-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+    {{ with .Params.description }}
+    <p class="project-item-description">{{ . }}</p>
+    {{ end }}
+</article>

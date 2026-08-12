@@ -32,7 +32,7 @@ verification steps that get run before anything ships.
 | Posts list page heading | `content/posts/_index.md` | `title` in front matter |
 | A blog post | `content/posts/<slug>.md` | `title`, `date`, `draft`, `description`, `isStarred` (adds a star icon on the card), `category` front matter + Markdown body |
 | Projects list page heading | `content/projects/_index.md` | `title` in front matter |
-| A project page | `content/projects/<slug>.md` | `title`, `date`, `draft`, `description` front matter + Markdown body |
+| A project page | `content/projects/<slug>.md` | `title`, `date`, `draft`, `description` front matter + Markdown body. `date` is set but not displayed — the Projects section uses its own portfolio-style templates (`layouts/projects/single.html`, `layouts/projects/list.html`, `layouts/_partials/projectCard.html`) that drop the date and make the title the bold, primary element. Blog posts are unaffected — they still use the theme's generic date-showing templates. `description` doubles as the one-line teaser shown under the title on the Projects list page. |
 | Embedded video/media inside a page | Inside that page's `.md` body | Raw HTML (e.g. an `<iframe>`) — `markup.goldmark.renderer.unsafe = true` in `hugo.toml` allows this |
 | Video embed sizing/styling | `assets/sass/_custom.scss` | `.video-embed` rule (already wired up; wrap new embeds in a `<div class="video-embed">`) |
 | Any other custom CSS | `assets/sass/_custom.scss` | Add rules — this file overrides the theme's own (empty) `_custom.scss` via the asset overlay |

@@ -194,6 +194,36 @@ BATCH LOG
     public/ output before commit.
 
 
+2026-08-12 — Portfolio-style Projects section (drop date, bold title)
+    Request: revise Projects to read as a portfolio, not a blog —
+    remove the date, make the project title the main bolded element,
+    focus on readability. Re-submitted the same [Header]/[Subheader]/
+    [Link]/[Sub-bio] instructions as the earlier batch (content
+    unchanged, already in place) plus this new styling ask.
+    Generic theme templates (layouts/single.html, layouts/list.html)
+    are shared by BOTH posts and projects, so a global CSS hide-date
+    rule would have wrongly hidden dates on blog posts too. Built
+    section-specific overrides instead — Hugo resolves
+    layouts/<section>/single.html and layouts/<section>/list.html
+    ahead of the generic ones, so only content/projects/* is affected:
+        layouts/projects/single.html   - drops the .post-meta/date
+          block entirely, adds a .project-title class to the <h1>
+        layouts/projects/list.html     - drops the theme's
+          GroupByDate year-heading loop, ranges pages directly
+        layouts/_partials/projectCard.html - new partial (bold title,
+          optional description teaser below it), replacing postCard's
+          flex date+title row layout which doesn't apply without a date
+        assets/sass/_custom.scss       - .project-title (bold),
+          .project-list/.project-item/.project-item-title/
+          -description (block-stacked cards, bold title, muted teaser)
+    Verified: clean build, grep-confirmed .post-meta absent and
+    .project-title/.project-item-title present in output, theme's own
+    generic templates untouched (blog posts keep their date when
+    added). Visual check (workflow step 6): screenshotted both
+    /projects/ and /projects/hand-to-hand-wizardry/ — title reads as
+    the clear bold primary element on both, no date, video/bio intact.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
