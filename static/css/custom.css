@@ -1,9 +1,0 @@
-/* Site-specific overrides layered on top of the Quint theme's styles.css */
-
-/* Narrow the hero bio/tagline so it wraps into paragraph-like lines
-   instead of stretching edge-to-edge across the hero section. */
-.hero .subtitle {
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-}
