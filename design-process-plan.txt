@@ -322,6 +322,25 @@ template with a still image instead of a video
     works independently of whether the file exists yet.
 
 
+2026-08-12 — The Salad Bowl's real lead image
+    User supplied the actual image (JPG, 1521x954, from
+    Desktop\Wizardry\TheSaladBowlThumbnail.jpg) - copied to
+    static/images/projects/the-salad-bowl.jpg (note: .jpg, not the
+    .png placeholder path used when the section was first scaffolded;
+    updated the .md reference and CONTENT-GUIDE.md's wording from
+    PNG-specific to <ext>-generic accordingly).
+    Source aspect (1.594:1) doesn't exactly match the 16:9 box
+    (1.778:1) - checked the math before shipping (object-fit: cover
+    scales to the constraining dimension and crops the other): here
+    width matches the box exactly and height overflows by ~10%,
+    cropped symmetrically top/bottom. Confirmed via visual check that
+    this crops only ceiling/floor margin, not the framed subject (the
+    altar/arena center or the cleaver on the right edge).
+    Verified: clean build, grep-confirmed the new path in output and
+    file present in public/images/projects/. Visual check via
+    Playwright screenshot against the real image.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

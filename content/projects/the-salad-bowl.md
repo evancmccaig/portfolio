@@ -6,7 +6,7 @@ description = "Placeholder — replace with a real description."
 +++
 
 <div class="image-embed">
-<img src="/images/projects/the-salad-bowl.png" alt="The Salad Bowl">
+<img src="/images/projects/the-salad-bowl.jpg" alt="The Salad Bowl">
 </div>
 
 _Placeholder — replace with a real bio for The Salad Bowl._
