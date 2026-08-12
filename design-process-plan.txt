@@ -283,6 +283,18 @@ Wizardry; investigated "embed not working" report
     still intact, existing content unaffected.
 
 
+2026-08-12 — Remove Table of Contents from all project pages
+    Removed the {{ partial "toc.html" . }} call from
+    layouts/projects/single.html (the section-specific template)
+    rather than adding a per-file `toc = false` front matter flag —
+    this way it's off for every current and future project page by
+    default, not just the one being edited at the time. Blog posts
+    and other sections are unaffected (they use the theme's generic
+    single.html, untouched). Verified: clean build, grep-confirmed
+    class="toc" absent from the built page; visual check via
+    Playwright screenshot.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
