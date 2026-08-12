@@ -1,7 +1,65 @@
+title = "Evan McCaig"
 baseURL = 'https://portfolio-3i9.pages.dev/'
 locale = 'en-us'
-title = 'Evan McCaig'
-theme = 'quint'
+theme = "hugo-blog-awesome"
+
+enableEmoji = true
+ignoreErrors = ["additional-script-loading-error"]
+
+[services]
+  [services.googleAnalytics]
+    id = ''
+  [services.disqus]
+    shortname = ''
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+[menu]
+  [[menu.main]]
+    pageRef = "/"
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menu.main]]
+    pageRef = "posts"
+    name = 'Posts'
+    url = '/posts/'
+    weight = 20
+  [[menu.main]]
+    pageRef = "about"
+    name = 'About'
+    url = '/about/'
+    weight = 30
 
 [params]
-  numImages = 12
+  sitename = "Evan McCaig"
+  defaultColor = "auto"
+  description = "Game Designer | C# | Unity"
+  mainSections = ['posts']
+  toc = true
+  tocOpen = false
+  goToTop = true
+  dateFormat = ""
+  rssFeedDescription = "summary"
+
+  [params.author]
+    avatar = "avatar.jpg"
+    intro = "Evan McCaig"
+    name = "Evan McCaig"
+    description = "Game Designer | C# | Unity | Create satisfying gaming experiences through diverse systems both visible and invisible to the player"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/evancmccaig"
+
+[[params.socialIcons]]
+  name = "Rss"
+  url = "/index.xml"
