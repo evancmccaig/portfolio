@@ -1,6 +1,7 @@
 +++
 title = "About"
 description = "Game Designer | C# | Unity"
+toc = false
 +++
 
 Passionate game designer with 2+ years of experience developing games in Unity. My primary strength is C# programming, but I've worked on titles such as Hand to Hand Wizardry and The Salad Bowl where I've demonstrated my player-centric design philosophies across all domains.
