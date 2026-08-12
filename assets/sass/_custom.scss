@@ -47,6 +47,36 @@
     }
 }
 
+// Smaller inline image for a subheader section (e.g. a supporting
+// screenshot inside "Level Design" or "Encounter Design"), as opposed
+// to a project's full-width 16:9 lead media above (.video-embed /
+// .image-embed). Natural aspect ratio, capped width, centered.
+// Usage: <img class="section-image" src="/images/projects/<file>" alt="...">
+.section-image {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 1.5rem auto;
+    border-radius: 6px;
+}
+
+// Two or more .section-image images side by side instead of stacked:
+// wrap them in <div class="section-images">...</div>
+.section-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+
+    .section-image {
+        margin: 0;
+        flex: 1 1 260px;
+        max-width: calc(50% - 0.5rem);
+    }
+}
+
 // Portfolio-style project title (single project page). No date sits
 // beneath it here (layouts/projects/single.html omits that block
 // entirely), so the title alone carries the heading.

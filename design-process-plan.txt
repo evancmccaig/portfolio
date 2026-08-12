@@ -390,6 +390,34 @@ template with a still image instead of a video
     Bowl; visual check via screenshot of both page tops.
 
 
+2026-08-12 — New .section-image / .section-images classes for smaller
+inline images (vs. full-width .image-embed)
+    Request: .image-embed works well for a project's header/lead
+    media but is wrong for smaller supporting images inside a
+    subheader section - it forces a fixed 16:9 box with absolute-
+    positioned, object-fit: cover content, meant for one dominant
+    piece of media, not an inline screenshot at natural aspect ratio.
+    Added .section-image (block, natural aspect ratio, max-width
+    500px, centered, no wrapping div needed - just add the class
+    straight to an <img>) and .section-images (flex row wrapper for
+    two-plus side by side).
+    Caught and fixed a real bug before shipping: the first pass had
+    .section-images .section-image inheriting max-width: 500px from
+    the base rule, so two side-by-side images (500+500+gap) didn't
+    fit in a normal content column and silently wrapped to stacked
+    instead of sitting side by side - looked identical to just using
+    two plain .section-image tags with no visual indication anything
+    was wrong. Found this via an ISOLATED test page (compiled CSS +
+    a real image file, no Hugo content touched) rather than editing
+    real project pages to test with - kept the verification fully
+    separate from content changes. Fixed with max-width: calc(50% -
+    0.5rem) scoped to the .section-images context specifically.
+    No real project content was changed - this batch only adds the
+    capability, per request. Verified via the isolated test page
+    (single image + side-by-side pair, both screenshotted) rather
+    than the live site, since nothing user-facing changed yet.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

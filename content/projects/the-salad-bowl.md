@@ -13,16 +13,28 @@ _The Salad Bowl is a single-player, 3D movement combat game. You play as an impr
 
 
 ## UI Programming {.section-heading}
+<div class="image-embed">
+<img src="/images/projects/the-salad-bowl.jpg" alt="The Salad Bowl">
+</div>
+
 _Insert Image of Player HUD_
 _Insert blurb: how we target simplicity and readability_
 _Insert Blurb: Challenges and lessons learned_
 
 ## Systems Programming {.section-heading}
+<div class="image-embed">
+<img src="/images/projects/the-salad-bowl.jpg" alt="The Salad Bowl">
+</div>
+
 _Insert Blurb: Infinite rounds and how scoring is scaled_
 _Insert Blurb: Challenges and lessons learned_
 
 
 ## SFX Implementation {.section-heading}
+<div class="image-embed">
+<img src="/images/projects/the-salad-bowl.jpg" alt="The Salad Bowl">
+</div>
+
 _Insert blurb: FMOD SFX player type 1 and why it works (playoneshot)_
 _Insert blurb: FMOD SFX player type 2 and why it works (looping / music track_
 _Insert Blurb: Challenges and lessons learned_
