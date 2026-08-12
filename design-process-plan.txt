@@ -418,6 +418,34 @@ inline images (vs. full-width .image-embed)
     than the live site, since nothing user-facing changed yet.
 
 
+2026-08-12 — Swapped .image-embed for .section-image on Hand-to-Hand
+Wizardry and The Salad Bowl
+    Request: replace every .image-embed usage in both files with the
+    new .section-image class, keeping the same jpeg/jpg files. Note
+    this included The Salad Bowl's HEADER image too (not just its
+    subsection images) - "all" was read literally, so the header
+    image lost its full-width 16:9 hero treatment and now displays at
+    the smaller, natural-aspect-ratio .section-image size like every
+    other image on that page. Flagged this to the user since it's a
+    real visual hierarchy change, not just a mechanical swap.
+    Hand-to-Hand Wizardry's .video-embed (the YouTube iframe) was left
+    untouched - only .image-embed instances were in scope.
+    While rebuilding to verify, hit an unrelated but build-breaking
+    problem: a third project file (last-night-at-deer-lake.md, not
+    part of this request) had its closing +++ misplaced after a
+    <div class="video-embed"> block instead of right after the front
+    matter fields, so TOML tried to parse the HTML as config and
+    failed the ENTIRE site build. Fixed the delimiter placement only
+    (moved +++ to the correct spot) since that's a structural bug
+    blocking everyone, not a content decision - did not touch that
+    file's actual content/copy, which is that project's own separate
+    unfinished work.
+    Verified: clean build, grep-confirmed zero image-embed occurrences
+    remain in either target file, .video-embed still present in HTH,
+    all original file paths unchanged. Visual check via full-page
+    screenshots of both pages.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
