@@ -77,6 +77,24 @@
     }
 }
 
+// Animated GIF inside a subheader section — same idea as
+// .section-image (natural aspect ratio, left-aligned, block) but
+// sized a bit larger and framed with a border, since a GIF is
+// usually demonstrating a workflow/gameplay loop where extra detail
+// helps, and the border visually flags "this one moves" next to
+// static .section-image screenshots. Browsers autoplay/loop GIFs
+// natively in a plain <img> — no JS or extra markup needed.
+// Usage: <img class="section-gif" src="/images/projects/<file>.gif" alt="...">
+.section-gif {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    border: 2px solid $light;
+}
+
 // Portfolio-style project title (single project page). No date sits
 // beneath it here (layouts/projects/single.html omits that block
 // entirely), so the title alone carries the heading.
@@ -194,6 +212,10 @@
 // prefers-color-scheme when defaultColor is "auto", or html.dark when
 // it's forced.
 @mixin custom-dark-mode {
+    .section-gif {
+        border-color: $dark-light;
+    }
+
     .project-item-title a {
         color: $dark-white;
 

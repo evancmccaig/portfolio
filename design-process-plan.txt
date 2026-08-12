@@ -505,6 +505,35 @@ Wizardry and The Salad Bowl
     a[target="_blank"]::after convention, not a bug.
 
 
+2026-08-12 — Real TSB screenshots + new .section-gif class
+    Found the source files in ContentToImport/ (a staging folder, not
+    yet organized into static/): TSB_Gameplay.png/2/3, plus
+    TSB_StartSequence.gif and HandToHandWizardry.gif. Count matched
+    exactly - 3 PNGs, 3 subsections (UI Programming, Systems
+    Programming, SFX Implementation) each still reusing the header
+    thumbnail as a placeholder - so swapped each section's placeholder
+    image for its real screenshot in file order, copied into
+    static/images/projects/, alt text "TSB Gameplay 1/2/3". Left the
+    page's actual header image (the-salad-bowl.jpg) untouched - not a
+    placeholder, wasn't part of "TSB pngs".
+    New .section-gif class: same natural-aspect-ratio/left-aligned
+    pattern as .section-image, but max-width 640px (vs 500px) and a
+    2px border, framing it distinctly since GIFs typically demonstrate
+    motion/workflow. No playback JS needed - GIFs autoplay/loop
+    natively in <img>. Added the matching dark-mode border-color
+    override alongside the existing custom-dark-mode mixin.
+    Did NOT add TSB_StartSequence.gif or HandToHandWizardry.gif to any
+    real page - only the PNGs were requested; the gif class was
+    requested as a standalone capability + usage explanation, tested
+    on an isolated page with the real gif file (not real content) the
+    same way .section-image was verified earlier.
+    Verified: clean build, grep-confirmed all 3 PNG paths in the
+    Salad Bowl page output and .section-gif in compiled CSS. Visual
+    check: full-page screenshot of the real Salad Bowl page (all 3
+    real screenshots correctly in place) + isolated screenshot proving
+    .section-gif renders and sizes correctly with a real gif.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
