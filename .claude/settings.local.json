@@ -3,7 +3,23 @@
     "allow": [
       "Bash(mkdir -p layouts)",
       "Bash(cp themes/quint/layouts/index.html layouts/index.html)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(git submodule *)",
+      "Bash(git rm *)",
+      "Bash(rm -rf .git/modules/themes/quint)",
+      "Bash(git status *)",
+      "Bash(rm -f layouts/index.html)",
+      "Bash(rmdir layouts *)",
+      "Bash(rm -f archetypes/default.md)",
+      "Bash(rmdir archetypes *)",
+      "Bash(mkdir -p content/pages)",
+      "Bash(rm -rf public resources)",
+      "Bash(hugo --gc --minify)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Replace Quint theme with hugo-blog-awesome *)",
+      "Bash(git push *)",
+      "WebFetch(domain:portfolio-3i9.pages.dev)",
+      "Bash(git commit *)"
     ]
   }
 }

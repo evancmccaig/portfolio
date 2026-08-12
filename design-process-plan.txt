@@ -1,0 +1,106 @@
+DESIGN PROCESS PLAN
+Portfolio site (evancmccaig/portfolio, theme: hugo-blog-awesome)
+====================================================================
+
+PURPOSE
+--------
+This is the shorthand format for specifying batches of content/design
+changes in one shot instead of one prompt per edit. Write a list of
+[Label] / [Content] pairs, hand it over, and it gets applied as one
+pass: edited, built locally, verified, then committed and pushed
+together.
+
+
+FORMAT
+------
+Each change is two lines:
+
+    [Label] Name of the element
+    [Content] "The value to put there"
+
+- Label = which kind of element this is (see LEGEND below).
+- Name  = which specific instance of that element, when there's more
+  than one possible target (e.g. which page's tagline).
+- Content = the literal text, in quotes, exactly as it should appear.
+
+Stack multiple pairs to batch unrelated changes together. Order
+doesn't matter — they get grouped by which file they touch before
+anything is edited.
+
+
+LEGEND — label to site element
+-------------------------------
+| Label      | What it controls                          | Where it actually lives                          |
+|------------|--------------------------------------------|---------------------------------------------------|
+| [Header]   | Main site/page title                        | hugo.toml -> params.author.name, params.sitename  |
+| [Sub-bio]  | Tagline under the name on the homepage      | hugo.toml -> params.author.description             |
+| [Intro]    | Short line above the tagline (optional)     | hugo.toml -> params.author.intro                   |
+| [About]    | Body text of the About page                 | content/pages/about.md                             |
+| [Post]     | A blog post's title/body                    | content/posts/<slug>.md                            |
+| [Social]   | A social/contact link                       | hugo.toml -> [[params.socialIcons]]                |
+| [Avatar]   | Profile photo                               | assets/avatar.jpg (file, not text)                 |
+| [Menu]     | A nav bar entry                             | hugo.toml -> [[menu.main]]                          |
+
+If a request uses a label not in this table, default behavior is to
+ask which element it maps to rather than guess.
+
+
+EXAMPLE (as submitted)
+-----------------------
+    [Header] Title page
+    [Content] "Evan McCaig"
+    [Sub-bio] Tagline
+    [Content] "Game Designer | C# | Unity | Create satisfying gaming
+    experiences through diverse systems both visible and invisible to
+    the player"
+
+Resolves to:
+    hugo.toml -> params.author.name        = "Evan McCaig"
+    hugo.toml -> params.author.description = "Game Designer | C# | Unity |
+        Create satisfying gaming experiences through diverse systems
+        both visible and invisible to the player"
+
+
+PROCESSING STEPS (what happens per batch)
+------------------------------------------
+1. Parse every [Label]/[Content] pair, resolve each against the
+   LEGEND, and list the exact file + field each one will change.
+   Flag anything ambiguous before touching files.
+2. Apply all edits.
+3. Run a clean local build (`hugo --gc --minify`) and confirm zero
+   errors/warnings before anything ships.
+4. Spot-check the rendered output for each changed field (grep the
+   built HTML, not just "it compiled").
+5. Run the DOMAIN VERIFICATION CHECKLIST below.
+6. Commit (one commit per batch, descriptive message) and push only
+   after confirming with you, unless you've said to push without
+   asking for that session.
+7. After push, re-check the live URL to confirm the deploy actually
+   picked up the change (not just that it was pushed).
+
+
+DOMAIN VERIFICATION CHECKLIST (run after every push)
+-------------------------------------------------------
+[ ] baseURL in hugo.toml matches the actual live URL
+    (currently: https://portfolio-3i9.pages.dev/)
+[ ] Cloudflare Pages "Deployments" tab shows the latest commit hash
+    with a successful (not failed) build
+[ ] HUGO_VERSION is pinned in Cloudflare Pages env vars (Production
+    AND Preview) to a version that satisfies the theme's minimum
+    (hugo-blog-awesome requires extended >= 0.160.0)
+[ ] Live page HTML actually contains the new content (fetch the live
+    URL and grep for the changed string — don't trust "looks right in
+    a screenshot", browser/CDN caching can show a stale page)
+[ ] If the live page looks stale but the deployment succeeded: hard
+    refresh / incognito test before concluding anything is broken —
+    this is almost always cache, not a failed deploy
+
+
+OPEN ITEMS NOT YET COVERED BY THE LEGEND
+-------------------------------------------
+- Custom domain (currently on the free *.pages.dev subdomain by choice)
+- Avatar photo (assets/avatar.jpg not yet added)
+- Real social links beyond GitHub + RSS
+- Project/portfolio-specific display (this theme is blog-first; a
+  dedicated projects section would need new layout work, same as the
+  Quint-era attempt that was rolled back)
