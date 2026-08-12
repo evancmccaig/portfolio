@@ -12,15 +12,20 @@ description = "Level Designer, Encounter Designer, UI Programmer, Gameplay Progr
 Hand to Hand Wizardry is a single-player Dark Fantasy Boomer Shooter where you play as a Wizard who willingly sacrifices both of his hands to gain access to a dungeon where hands are treated as religious symbols. You will graft dead wizards' hands onto your severed wrists to gain powerful spells that you use to traverse the dungeon, fight monstrous creatures, and discover the secrets that lie below the surface.
 
 
-## Contributions {.section-heading}
+## Level Design {.section-heading}
 
 <div class="image-embed">
 <img src="/images/projects/Library2.jpeg" alt="ld1">
 </div>
+_Placeholder Image, Replace with Modular Kit GIF_
+
+## Encounter Design {.section-heading}
 
 <div class="image-embed">
 <img src="/images/projects/Bridge1.jpeg" alt="ld2">
 </div>
+_Placeholder, replace with encounter simulator spreadsheet IMG_
+_insert blurb about using the encounter simulator_
 
 <div class="image-embed">
 <img src="/images/projects/Library.jpeg" alt="ld3">
