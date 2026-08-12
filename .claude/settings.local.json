@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p layouts)",
+      "Bash(cp themes/quint/layouts/index.html layouts/index.html)",
+      "Bash(curl *)"
+    ]
+  }
+}
