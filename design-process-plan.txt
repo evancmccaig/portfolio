@@ -534,6 +534,45 @@ Wizardry and The Salad Bowl
     .section-gif renders and sizes correctly with a real gif.
 
 
+2026-08-12 — Moved ContentToImport/ files to static/images/projects/,
+compressed 2 oversized GIFs and 1 oversized JPEG before committing
+    Moved HandToHandWizardry.gif, LNADL_OverviewShot.jpg, and
+    TSB_StartSequence.gif into static/images/projects/ (their
+    established location). Removed desktop.ini (Windows folder-view
+    metadata, not real content) and the TSB_Gameplay*.png duplicates
+    (already copied there in the previous batch). Removed the
+    now-empty ContentToImport/ folder.
+    Stopped before committing: HandToHandWizardry.gif (31.7MB, 1280x720,
+    75 frames) and TSB_StartSequence.gif (55.5MB, 1280x720, 125 frames)
+    - 87MB combined. Flagged before proceeding rather than committing
+    silently: Cloudflare Pages has historically had a ~25MB per-file
+    limit on static assets, so the 55.5MB file would likely have
+    failed to deploy outright, and git history growth from committing
+    files this large is effectively permanent. Asked the user how to
+    handle it; chose "compress but keep as GIF" over converting to
+    video or committing as-is.
+    Compressed both with gifsicle (via npx, no local install needed):
+    -O3 --lossy=80 --colors=128 --resize-width 640.
+        HandToHandWizardry.gif: 31.7MB -> 2.7MB (~91% smaller)
+        TSB_StartSequence.gif:  55.5MB -> 5.3MB (~90% smaller)
+    Checked quality by extracting a mid-animation frame from each
+    compressed file before committing - no visible banding/artifacting
+    despite the aggressive settings.
+    Also caught LNADL_OverviewShot.jpg at 6.7MB (a 4284x5712 full-res
+    photo) - downscaled the same way the avatar photo was handled
+    earlier (max 1600px edge, EXIF-stripped, JPEG quality 85) -> 278KB.
+    This file was already referenced by last-night-at-deer-lake.md's
+    image-embed but didn't exist yet, so that page's image was broken
+    until this move - confirmed fixed via screenshot.
+    Neither GIF was wired into any page's content - this was a file
+    organization + size-safety task only, not a content change beyond
+    fixing the one broken reference.
+    Verified: clean build, confirmed all 3 moved files present in
+    public/images/projects/, grep-confirmed the LNADL reference
+    resolves, visual check via screenshot of Last Night at Deer Lake's
+    now-working image.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't
