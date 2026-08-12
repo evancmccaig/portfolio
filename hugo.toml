@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://portfolio-3i9.pages.dev/'
 locale = 'en-us'
 title = 'Evan McCaig'
 theme = 'quint'
