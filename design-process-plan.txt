@@ -251,6 +251,38 @@ BATCH LOG
     correctly colored in both modes.
 
 
+2026-08-12 — Added Level Design + Programming sections to Hand-to-Hand
+Wizardry; investigated "embed not working" report
+    Investigated a report that the YouTube embed wasn't rendering.
+    Checked both local build and the live deployed HTML directly
+    (curl, not just eyeballing) - the <iframe>/video-embed markup was
+    identical and correct in both. Playwright screenshot showed the
+    embed rendering fine with a real YouTube thumbnail. Couldn't
+    reproduce - most likely explanation is stale CDN/browser cache
+    (same class of issue as the earlier domain-verification incident),
+    not a code bug. No fix applied since nothing was actually broken;
+    flagged to the user to hard-refresh/incognito-check post-deploy.
+    Added two new body sections ("Level Design", "Programming") styled
+    to match the page's own title exactly. Used Hugo's markdown
+    heading-attribute syntax (## Heading {.section-heading}) rather
+    than raw HTML for the headings specifically so they still get
+    picked up by the Table of Contents - raw HTML headings (like the
+    video-embed div) bypass Goldmark's heading/TOC extraction entirely.
+    New .section-heading class in assets/sass/_custom.scss - set
+    explicitly (font-size 2em, weight 800) rather than reusing
+    .header-title, since that theme rule is scoped to ".header
+    .header-title" and doesn't apply to a heading placed in body
+    content. Both new sections use clearly-labeled placeholder text
+    (no real copy was given for either) rather than fabricated-sounding
+    filler, matching the existing "Level Design Assets / _Coming
+    soon._" convention already on this page.
+    Verified: clean build, grep-confirmed section-heading class
+    attached and both new headings appear in the compiled
+    TableOfContents. Visual check via Playwright screenshot - both
+    sections render with the same bold weight as the page title, embed
+    still intact, existing content unaffected.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

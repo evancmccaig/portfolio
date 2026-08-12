@@ -31,6 +31,19 @@
     font-weight: 800;
 }
 
+// Reusable "same style as the project title" heading, for breaking a
+// project's body into major segments (e.g. Level Design, Programming).
+// Set explicitly rather than reusing .header-title — that theme rule
+// is scoped to ".header .header-title" and won't apply outside that
+// specific wrapper, which a body-content heading isn't inside.
+.section-heading {
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
 // Portfolio-style project grid (layouts/projects/list.html +
 // layouts/_partials/projectCard.html). Deliberately not reusing the
 // theme's .post-item styling: that layout is a flex row built around
