@@ -363,6 +363,23 @@ template with a still image instead of a video
     since it was untracked and redundant; nothing referenced it.
 
 
+2026-08-12 — Fixed 4 broken Level Design images on Hand-to-Hand Wizardry
+    User added 4 <div class="image-embed"><img ...></div> blocks
+    (same pattern as The Salad Bowl) but none rendered. Root cause
+    wasn't the embed method - it was genuinely broken file references:
+    the .md pointed at Library2.jpg / Bridge.jpg / Library.jpg /
+    Bridge2.jpg, but the actual committed files were
+    Library2.jpeg / Bridge1.jpeg / Library.jpeg / Brdige2.jpeg (note
+    the extension mismatch and the "Brdige2"/"Bridge1" name
+    mismatches). Fixed the four src paths to match the real filenames
+    exactly rather than renaming the image files, and set alt text to
+    ld1/ld2/ld3/ld4 per request (was all "The Salad Bowl", copy-paste
+    leftover). Verified: clean build, confirmed all 4 files exist at
+    their referenced paths in public/, visual check via full-page
+    screenshot showed all 4 actual level design screenshots rendering
+    correctly in their 16:9 boxes.
+
+
 ROADMAP — content not yet ready to implement (no assets exist yet)
 -----------------------------------------------------------------------
 These are from the original "Portfolio Content Plan" note but aren't

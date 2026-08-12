@@ -15,19 +15,19 @@ Hand to Hand Wizardry is a single-player Dark Fantasy Boomer Shooter where you p
 ## Level Design {.section-heading}
 
 <div class="image-embed">
-<img src="/images/projects/Library2.jpg" alt="The Salad Bowl">
+<img src="/images/projects/Library2.jpeg" alt="ld1">
 </div>
 
 <div class="image-embed">
-<img src="/images/projects/Bridge.jpg" alt="The Salad Bowl">
+<img src="/images/projects/Bridge1.jpeg" alt="ld2">
 </div>
 
 <div class="image-embed">
-<img src="/images/projects/Library.jpg" alt="The Salad Bowl">
+<img src="/images/projects/Library.jpeg" alt="ld3">
 </div>
 
 <div class="image-embed">
-<img src="/images/projects/Bridge2.jpg" alt="The Salad Bowl">
+<img src="/images/projects/Brdige2.jpeg" alt="ld4">
 </div>
 
 _Placeholder_
