@@ -10,73 +10,94 @@ changes in one shot instead of one prompt per edit. Write a list of
 pass: edited, built locally, verified, then committed and pushed
 together.
 
+This file is also the reference an AI agent (this one, or a different
+one on a later session) reads FIRST before touching the site, so a
+plan written today stays executable by whoever picks it up later.
+
 
 FORMAT
 ------
-Each change is two lines:
+Each instruction is one to three lines:
 
     [Label] Name of the element
     [Content] "The value to put there"
 
-- Label = which kind of element this is (see LEGEND below).
-- Name  = which specific instance of that element, when there's more
-  than one possible target (e.g. which page's tagline).
-- Content = the literal text, in quotes, exactly as it should appear.
+- Label   = which kind of element this is (see LEGEND below). A label
+  is contextual, not a fixed 1:1 mapping — [Header] means something
+  different next to "Title page" than it does next to "Projects
+  Section". The Name line is what disambiguates it.
+- Name    = which specific instance of that element.
+- Content = the literal value — text in quotes, or a URL/file path
+  for non-text elements (links, images).
 
-Stack multiple pairs to batch unrelated changes together. Order
-doesn't matter — they get grouped by which file they touch before
-anything is edited.
+Stack multiple instructions to batch unrelated changes together.
+Order doesn't matter — they get grouped by which file they touch
+before anything is edited.
 
 
 LEGEND — label to site element
 -------------------------------
-| Label      | What it controls                          | Where it actually lives                          |
-|------------|--------------------------------------------|---------------------------------------------------|
-| [Header]   | Main site/page title                        | hugo.toml -> params.author.name, params.sitename  |
-| [Sub-bio]  | Tagline under the name on the homepage      | hugo.toml -> params.author.description             |
-| [Intro]    | Short line above the tagline (optional)     | hugo.toml -> params.author.intro                   |
-| [About]    | Body text of the About page                 | content/pages/about.md                             |
-| [Post]     | A blog post's title/body                    | content/posts/<slug>.md                            |
-| [Social]   | A social/contact link                       | hugo.toml -> [[params.socialIcons]]                |
-| [Avatar]   | Profile photo                               | assets/avatar.jpg (file, not text)                 |
-| [Menu]     | A nav bar entry                             | hugo.toml -> [[menu.main]]                          |
+| Label       | What it controls                             | Where it actually lives                              |
+|-------------|-----------------------------------------------|--------------------------------------------------------|
+| [Header]    | A top-level title — site identity or a new    | Site identity -> hugo.toml params.author.name/sitename |
+|             | section's own heading                         | New section  -> content/<section>/_index.md title      |
+| [Subheader] | The heading for one item inside a section     | content/<section>/<slug>.md title                       |
+| [Sub-bio]   | A secondary descriptive line under a heading  | Homepage tagline -> hugo.toml params.author.description |
+|             |                                                | Per-item bio -> body text in that item's .md file       |
+| [Intro]     | Short line above the tagline (optional)       | hugo.toml -> params.author.intro                        |
+| [Link]      | An embedded link/media element                | Raw HTML in the item's .md body (goldmark unsafe=true    |
+|             |                                                | is enabled, so <iframe>/<div> embeds are allowed)        |
+| [About]     | Body text of the About page                   | content/pages/about.md                                   |
+| [Post]      | A blog post's title/body                      | content/posts/<slug>.md                                  |
+| [Social]    | A social/contact link                         | hugo.toml -> [[params.socialIcons]]                       |
+| [Avatar]    | Profile photo                                 | assets/avatar.jpg (file, not text)                        |
+| [Menu]      | A nav bar entry                               | hugo.toml -> [[menu.main]]                                |
 
-If a request uses a label not in this table, default behavior is to
-ask which element it maps to rather than guess.
-
-
-EXAMPLE (as submitted)
------------------------
-    [Header] Title page
-    [Content] "Evan McCaig"
-    [Sub-bio] Tagline
-    [Content] "Game Designer | C# | Unity | Create satisfying gaming
-    experiences through diverse systems both visible and invisible to
-    the player"
-
-Resolves to:
-    hugo.toml -> params.author.name        = "Evan McCaig"
-    hugo.toml -> params.author.description = "Game Designer | C# | Unity |
-        Create satisfying gaming experiences through diverse systems
-        both visible and invisible to the player"
+If a request uses a Name that doesn't map to anything that exists yet
+on the site (e.g. "Projects Section" the first time it's mentioned),
+that's a signal to BUILD the underlying structure first — new content
+section, list/detail templates, menu entry — then apply the content
+on top of it. See WORKFLOW step 2.
 
 
-PROCESSING STEPS (what happens per batch)
-------------------------------------------
-1. Parse every [Label]/[Content] pair, resolve each against the
-   LEGEND, and list the exact file + field each one will change.
-   Flag anything ambiguous before touching files.
-2. Apply all edits.
-3. Run a clean local build (`hugo --gc --minify`) and confirm zero
-   errors/warnings before anything ships.
-4. Spot-check the rendered output for each changed field (grep the
-   built HTML, not just "it compiled").
-5. Run the DOMAIN VERIFICATION CHECKLIST below.
-6. Commit (one commit per batch, descriptive message) and push only
-   after confirming with you, unless you've said to push without
-   asking for that session.
-7. After push, re-check the live URL to confirm the deploy actually
-   picked up the change (not just that it was pushed).
+WORKFLOW — how to execute a batch (for any AI agent, not just this session)
+------------------------------------------------------------------------------
+1. PARSE. Read every [Label]/[Content] instruction, resolve each
+   against the LEGEND, and write out the exact file + field each one
+   will change. Flag anything genuinely ambiguous before touching
+   files — but a Name that's simply new (see above) is not ambiguous,
+   it's a build step.
+2. BUILD STRUCTURE IF NEEDED. If an instruction targets a site element
+   that doesn't exist yet (a new content section, a new nav item, a
+   new embed pattern), create it before writing content into it:
+     - New content section -> content/<section>/_index.md (list page)
+       + content/<section>/<slug>.md (detail pages). Check whether the
+       theme's existing layouts/list.html and layouts/single.html
+       already render it acceptably before writing custom templates —
+       this theme's generic templates cover most cases with zero new
+       layout code.
+     - New nav entry -> add a [[menu.main]] block in hugo.toml, with a
+       `weight` placing it where it should sit in the nav order.
+     - New embed/visual pattern -> prefer a small CSS addition in
+       assets/sass/_custom.scss (this project-root file overrides the
+       theme's own empty assets/sass/_custom.scss via Hugo's asset
+       overlay — never edit the copy inside themes/hugo-blog-awesome/)
+       over one-off inline styling, so the pattern is reusable next time.
+3. APPLY CONTENT. Write the actual [Content] values into place.
+4. BUILD LOCALLY. `hugo --gc --minify` from the repo root. Zero errors
+   or warnings required before moving on.
+5. VERIFY BY GREPPING OUTPUT. Don't trust "it compiled" — grep the
+   actual built HTML under public/ for each changed value (title text,
+   embed URL, CSS class actually present in the compiled stylesheet,
+   etc.) so a silently-wrong template still gets caught.
+6. RUN THE DOMAIN VERIFICATION CHECKLIST below.
+7. COMMIT (one commit per batch, descriptive message) and PUSH — ask
+   for confirmation before pushing unless told not to for that
+   session.
+8. RE-CHECK LIVE. After push, fetch the live URL and confirm the
+   deploy picked up the change — a successful push is not the same as
+   a successful deploy (Cloudflare can still fail the build; see the
+   HUGO_VERSION incident logged below for what that looks like).
 
 
 DOMAIN VERIFICATION CHECKLIST (run after every push)
@@ -87,13 +108,80 @@ DOMAIN VERIFICATION CHECKLIST (run after every push)
     with a successful (not failed) build
 [ ] HUGO_VERSION is pinned in Cloudflare Pages env vars (Production
     AND Preview) to a version that satisfies the theme's minimum
-    (hugo-blog-awesome requires extended >= 0.160.0)
+    (hugo-blog-awesome requires extended >= 0.160.0; this repo builds
+    locally on 0.164.0)
 [ ] Live page HTML actually contains the new content (fetch the live
     URL and grep for the changed string — don't trust "looks right in
     a screenshot", browser/CDN caching can show a stale page)
 [ ] If the live page looks stale but the deployment succeeded: hard
     refresh / incognito test before concluding anything is broken —
     this is almost always cache, not a failed deploy
+[ ] If a Retry/"force redeploy" of a previously-failed build still
+    shows the identical error after fixing the underlying cause
+    (e.g. an env var), don't trust it — Retry can re-run against the
+    config snapshotted at original trigger time. Push a new commit
+    (an empty one is fine) to force a genuinely fresh build.
+
+
+BATCH LOG
+----------
+2026-08-12 — Theme swap (Quint -> hugo-blog-awesome) + HUGO_VERSION fix
+    Swapped theme submodule, rebuilt hugo.toml for the new theme,
+    removed Quint-specific overrides. First deploy failed:
+    `.Site.Language.Locale` template error — Cloudflare's default
+    build image predates that Hugo field. Root cause: HUGO_VERSION was
+    never pinned in Cloudflare Pages env vars. Fixed by setting
+    HUGO_VERSION=0.164.0 for both Production and Preview, then a fresh
+    push (Retry alone did not pick up the new setting).
+
+2026-08-12 — Web process batch: hero content + Projects section
+    [Header] Title page / [Content] "Evan McCaig"
+      -> already matched hugo.toml params.author.name, no change.
+    [Sub-bio] Tagline / [Content] "Game Designer | C# | Unity | ..."
+      -> already matched params.author.description, no change.
+    [Header] Projects Section / [Content] "Projects"
+      -> new section, didn't exist yet. Built:
+         content/projects/_index.md (list page, reuses theme's
+         generic layouts/list.html), hugo.toml [[menu.main]] entry
+         (weight 20, between Home and Posts).
+    [Subheader] Name of first project / [Content] "hand to hand wizardry"
+      -> content/projects/hand-to-hand-wizardry.md, title
+         "Hand-to-Hand Wizardry" (reuses theme's generic
+         layouts/single.html).
+    [Link] Embed YouTube, 1920x1080 / [Content] youtube.com/watch?v=C3mWOifDKh4
+      -> responsive 16:9 <iframe> embed in the project's .md body,
+         wrapped in a .video-embed div. New CSS added to
+         assets/sass/_custom.scss (aspect-ratio box, scales to the
+         container, caps at 1920px so it never upscales past source
+         resolution — a literal fixed 1920x1080 element would overflow
+         small screens, so this achieves the same visual ceiling
+         responsively instead).
+    [Sub-bio] Game bio below the embed / [Content] "Hand-to-Hand
+    Wizardry delivers a first-person, dark fantasy retro-shooter..."
+      -> body paragraph directly under the embed in the same file.
+    "Level design assets:" (no content yet) -> left as a
+      "## Level Design Assets / _Coming soon._" placeholder heading
+      on the project page.
+    Verified: clean build, grep-confirmed embed URL, CSS class in
+    compiled stylesheet, nav link, and bio text all present in
+    public/ output before commit.
+
+
+ROADMAP — content not yet ready to implement (no assets exist yet)
+-----------------------------------------------------------------------
+These are from the original "Portfolio Content Plan" note but aren't
+[Label]/[Content] instructions — they're prerequisites that have to
+happen outside this repo first (recording, editing, writing) before
+there's anything to put on the page.
+
+- Project page (generic template: footage/screenshots/trailer, high
+  concept, contributions, design process) — est. 45 min once assets exist
+- Level Design Documentation (1-minute YouTube video: combat
+  calculator, modular kit building, timelapse layouts, narrated design
+  reasoning, edited in Premiere Pro) — est. 4 hours
+- Git page for the Hand-to-Hand Wizardry gameplay event bus (readable
+  script, demo folder with example scripts/prefabs/docs, screenshots
+  formatted onto the GitHub repo page, then linked from the portfolio) — est. 2 hours
 
 
 OPEN ITEMS NOT YET COVERED BY THE LEGEND
@@ -101,6 +189,5 @@ OPEN ITEMS NOT YET COVERED BY THE LEGEND
 - Custom domain (currently on the free *.pages.dev subdomain by choice)
 - Avatar photo (assets/avatar.jpg not yet added)
 - Real social links beyond GitHub + RSS
-- Project/portfolio-specific display (this theme is blog-first; a
-  dedicated projects section would need new layout work, same as the
-  Quint-era attempt that was rolled back)
+- Hand-to-Hand Wizardry's "Level Design Assets" section on its project
+  page (screenshots/timelapse from the roadmap item above)
