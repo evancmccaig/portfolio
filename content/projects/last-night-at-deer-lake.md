@@ -6,13 +6,13 @@ description = "Gameplay Designer"
 +++
 
 <div class="image-embed">
-<img src="/images/projects/Bridge1.jpeg" alt="ld2">
+<img src="/images/projects/LNADL_OverviewShot.jpg" alt="ld2">
 </div>
 
-_Placeholder image, replace with gameplay / board image_
-_Creating / designing the rule-bool_
-_Balancing for optimal pacing and gameplay time_
 
+Placeholder image, replace with gameplay / board image
+Creating / designing the rule-bool
+Balancing for optimal pacing and gameplay time
 
 
 

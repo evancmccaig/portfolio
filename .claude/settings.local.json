@@ -31,7 +31,15 @@
       "Bash(python3 *)",
       "Bash(netstat -ano)",
       "Bash(awk '{print $5}')",
-      "Bash(xargs -r -I{} taskkill //F //PID {})"
+      "Bash(xargs -r -I{} taskkill //F //PID {})",
+      "PowerShell(Get-Command *)",
+      "Bash(mv ContentToImport/HandToHandWizardry.gif static/images/projects/HandToHandWizardry.gif)",
+      "Bash(mv ContentToImport/LNADL_OverviewShot.jpg static/images/projects/LNADL_OverviewShot.jpg)",
+      "Bash(mv ContentToImport/TSB_StartSequence.gif static/images/projects/TSB_StartSequence.gif)",
+      "Bash(rm ContentToImport/TSB_Gameplay.png ContentToImport/TSB_Gameplay2.png ContentToImport/TSB_Gameplay3.png)",
+      "Bash(rm ContentToImport/desktop.ini)",
+      "Bash(npx --yes gifsicle --version)",
+      "Bash(grep -n 'eq \\\\$icon_name \"' layouts/_partials/svgs/svgs.html)"
     ]
   }
 }
