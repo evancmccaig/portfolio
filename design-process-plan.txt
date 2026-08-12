@@ -90,11 +90,26 @@ WORKFLOW — how to execute a batch (for any AI agent, not just this session)
    actual built HTML under public/ for each changed value (title text,
    embed URL, CSS class actually present in the compiled stylesheet,
    etc.) so a silently-wrong template still gets caught.
-6. RUN THE DOMAIN VERIFICATION CHECKLIST below.
-7. COMMIT (one commit per batch, descriptive message) and PUSH — ask
+6. CHECK VISUALS, DON'T JUST REASON ABOUT CSS. Grepping the HTML only
+   proves the markup exists — it doesn't prove it's visible. Launch
+   `hugo server` in the background, wait for it to actually respond
+   (poll, don't sleep-and-hope), then screenshot the changed page:
+     hugo server --port 1313 &
+     (poll http://localhost:1313/ until 200)
+     npx --yes playwright screenshot --wait-for-timeout=3000 \
+       --full-page "http://localhost:1313/<path>/" <output>.png
+   (chromium-cli is the preferred driver per the `run` skill; it
+   wasn't installed on this machine, so this repo falls back to
+   Playwright's one-shot `screenshot` command — `npx playwright
+   install chromium` once if the browser binary is missing.) Actually
+   look at the screenshot before declaring something rendered
+   correctly. Stop the dev server afterward (kill whatever's listening
+   on the port) so it doesn't linger.
+7. RUN THE DOMAIN VERIFICATION CHECKLIST below.
+8. COMMIT (one commit per batch, descriptive message) and PUSH — ask
    for confirmation before pushing unless told not to for that
    session.
-8. RE-CHECK LIVE. After push, fetch the live URL and confirm the
+9. RE-CHECK LIVE. After push, fetch the live URL and confirm the
    deploy picked up the change — a successful push is not the same as
    a successful deploy (Cloudflare can still fail the build; see the
    HUGO_VERSION incident logged below for what that looks like).
@@ -125,6 +140,18 @@ DOMAIN VERIFICATION CHECKLIST (run after every push)
 
 BATCH LOG
 ----------
+2026-08-12 — Malformed `date` front matter broke the whole build
+    content/projects/hand-to-hand-wizardry.md's `date` field got
+    hand-edited to a non-date string ('Hand to Hand Wizardry'). Hugo
+    treats an unparsable date as a fatal error, not a per-page
+    warning — the ENTIRE site fails to build, not just that page. This
+    was never pushed (caught locally), but it's why "the embed isn't
+    visible" can have nothing to do with the embed itself — always
+    run a clean `hugo --gc --minify` and read the actual error before
+    assuming a rendering/CSS bug. Confirmed via WORKFLOW step 6
+    (headless-browser screenshot) that the embed renders correctly
+    once the date was fixed — no CSS bug existed.
+
 2026-08-12 — Theme swap (Quint -> hugo-blog-awesome) + HUGO_VERSION fix
     Swapped theme submodule, rebuilt hugo.toml for the new theme,
     removed Quint-specific overrides. First deploy failed:

@@ -66,5 +66,5 @@ ignoreErrors = ["additional-script-loading-error"]
   url = "https://github.com/evancmccaig"
 
 [[params.socialIcons]]
-  name = "Rss"
-  url = "/index.xml"
+  name = "linkedin"
+  url = "www.linkedin.com/in/evancmccaig"

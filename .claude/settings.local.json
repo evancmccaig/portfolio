@@ -19,7 +19,12 @@
       "Bash(git commit -m 'Replace Quint theme with hugo-blog-awesome *)",
       "Bash(git push *)",
       "WebFetch(domain:portfolio-3i9.pages.dev)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(chromium-cli --session portfolio-check)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node -e \"require\\('playwright'\\); console.log\\('playwright module found'\\)\")",
+      "Bash(npx --yes playwright install chromium)",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 1313 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { $conn | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -Confirm:$false; \"Killed PID $_\" } } else { \"No listener on 1313\" })"
     ]
   }
 }
