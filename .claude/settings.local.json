@@ -28,7 +28,10 @@
       "PowerShell($conn = Get-NetTCPConnection -LocalPort 1313 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { $conn | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -Confirm:$false } })",
       "Bash(python3 -c ' *)",
       "Bash(grep -o '<main[^>]*>.\\\\{0,400\\\\}' public/index.html)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(netstat -ano)",
+      "Bash(awk '{print $5}')",
+      "Bash(xargs -r -I{} taskkill //F //PID {})"
     ]
   }
 }
